@@ -8,19 +8,24 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 
 
+@ApiModel
 @Entity
 @Table(name = "categoria")
 public class Categoria {
 	
+	@ApiModelProperty(example="1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
 	
+	@ApiModelProperty(example="Lazer")
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String nome;

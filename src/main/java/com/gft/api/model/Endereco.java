@@ -2,35 +2,37 @@ package com.gft.api.model;
 
 import javax.persistence.Embeddable;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 @Embeddable
 public class Endereco {
 
 	
-	
+	@ApiModelProperty(example="R Alemanha")
 	private String logradouro;
 	
-	
+	@ApiModelProperty(example="2000")
 	private String numero;
 	
 	
-
+	@ApiModelProperty(example="Casa 07")
 	private String complemento;
 	
 	
-
+	@ApiModelProperty(example="Mogilar")
 	private String bairro;
 	
 	
-	
+	@ApiModelProperty(example="08773-123")
 	private String cep;
 	
 	
-	
+	@ApiModelProperty(example="Mogi das Cruzes")
 	private String cidade;
 	
 	
-	
+	@ApiModelProperty(example="São Paulo")
 	private String estado;
 	
 	

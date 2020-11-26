@@ -12,15 +12,18 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name="pessoa")
 public class Pessoa {
 
+	@ApiModelProperty(example="1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	
+	@ApiModelProperty(example="Kauan Drey")
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String nome;
@@ -29,7 +32,7 @@ public class Pessoa {
 	@Embedded
 	private Endereco endereco;
 	
-	
+	@ApiModelProperty(example="false/true")
 	@NotNull
 	private Boolean ativo;
 	
