@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gft.api.event.RecursoCriadoEvent;
@@ -64,6 +66,17 @@ public class CategoriaResource {
 			@ApiParam(value = "Código de uma categoria para buscar", example = "1") @PathVariable Long codigo) {
 		Categoria categoria = categoriaRepository.findById(codigo).orElse(null);
 		return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
+
+	}
+	
+	
+	@ApiOperation("Deleta uma categoria pelo código")
+	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
+	@DeleteMapping("/{codigo}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(
+			@ApiParam(value = "Código de uma categoria para deletar", example = "1") @PathVariable Long codigo) {
+		this.categoriaRepository.deleteById(codigo);
 
 	}
 
