@@ -20,54 +20,52 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@Table(name="lancamento")
+@Table(name = "lancamento")
 public class Lancamento {
 
-	@ApiModelProperty(example="1")
+	@ApiModelProperty(example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
-	@ApiModelProperty(example="Pagamento Netflix")
+
+	@ApiModelProperty(example = "Pagamento Netflix")
 	@NotNull
 	private String descricao;
-	
-	@ApiModelProperty(example="01/12/2020")
+
+	@ApiModelProperty(example = "01/12/2020")
 	@NotNull
-	@Column(name="data_vencimento")
+	@Column(name = "data_vencimento")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataVencimento;
-	
-	@ApiModelProperty(example="30/11/2020")
-	@Column(name="data_pagamento")
+
+	@ApiModelProperty(example = "30/11/2020")
+	@Column(name = "data_pagamento")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataPagamento;
-	
-	@ApiModelProperty(example="9600.00")
+
+	@ApiModelProperty(example = "9600.00")
 	@NotNull
 	private BigDecimal valor;
-	
-	@ApiModelProperty(example="Pagamento será realizado no dia 29/11/2020")
+
+	@ApiModelProperty(example = "Pagamento será realizado no dia 29/11/2020")
 	private String observacao;
-	
-	@ApiModelProperty(example="RECEITA/DESPESA")
+
+	@ApiModelProperty(example = "RECEITA/DESPESA")
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
-	
-	@ApiModelProperty(example="1")
+
+	@ApiModelProperty(example = "1")
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="codigo_categoria")
+	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
-	
-	@ApiModelProperty(example="1")
+
+	@ApiModelProperty(example = "1")
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="codigo_pessoa")
+	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
-	
-	
 
 	public Long getCodigo() {
 		return codigo;
@@ -165,5 +163,5 @@ public class Lancamento {
 			return false;
 		return true;
 	}
-	
+
 }

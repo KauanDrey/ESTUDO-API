@@ -15,32 +15,31 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@Table(name="pessoa")
+@Table(name = "pessoa")
 public class Pessoa {
 
-	@ApiModelProperty(example="1")
+	@ApiModelProperty(example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
-	@ApiModelProperty(example="Kauan Drey")
+
+	@ApiModelProperty(example = "Kauan Drey")
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String nome;
-	
-	
+
 	@Embedded
 	private Endereco endereco;
-	
-	@ApiModelProperty(example="false/true")
+
+	@ApiModelProperty(example = "false/true")
 	@NotNull
 	private Boolean ativo;
-	
+
 	@JsonIgnore
 	@Transient
-	public boolean isInativo( ) {
+	public boolean isInativo() {
 		return !this.ativo;
-		
+
 	}
 
 	public Long getCodigo() {
@@ -99,10 +98,5 @@ public class Pessoa {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
 }

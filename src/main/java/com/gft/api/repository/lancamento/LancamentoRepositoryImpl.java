@@ -22,10 +22,6 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	@PersistenceContext
 	private EntityManager manager;
 
-	
-
-	
-
 	@Override
 	public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
@@ -41,7 +37,6 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 	}
 
-	
 	private Predicate[] criarRestricoes(LancamentoFilter lancamentoFilter, CriteriaBuilder builder,
 			Root<Lancamento> root) {
 		List<Predicate> predicates = new ArrayList<>();
@@ -72,19 +67,17 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		int primeiroRegistroDaPagina = paginaAtual * totalResgistrosPorPaginas;
 		query.setFirstResult(primeiroRegistroDaPagina);
 		query.setMaxResults(totalResgistrosPorPaginas);
-		
+
 	}
 
 	private Long total(LancamentoFilter lancamentoFilter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
-		Predicate [] predicates = criarRestricoes(lancamentoFilter, builder, root);
+		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
 	}
 
-	
-	
 }

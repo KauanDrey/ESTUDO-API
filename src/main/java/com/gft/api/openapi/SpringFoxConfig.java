@@ -21,36 +21,24 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 
 	@Bean
 	public Docket apiDocket() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.gft.api.resource"))
-				.paths(PathSelectors.any())
-				.build()
-				.apiInfo(apiInfo())
-				.tags(new Tag("Categorias", "Gerencia as categorias"))
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.gft.api.resource")).paths(PathSelectors.any()).build()
+				.apiInfo(apiInfo()).tags(new Tag("Categorias", "Gerencia as categorias"))
 				.tags(new Tag("Lançamentos", "Gerencia todos os lançamentos"))
 				.tags(new Tag("Pessoas", "Gerencia todas as pessoas"));
-		
+
 	}
-	
-	
+
 	public ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Estudo-API Documentação | GFT")
-				.description("API para fins de estudos")
-				.version("1")
-				.contact(new Contact("GFT", "gft.com.br", "kauan.drey@gft.com"))
-				.build();
+		return new ApiInfoBuilder().title("Estudo-API Documentação | GFT").description("API para fins de estudos")
+				.version("1").contact(new Contact("GFT", "gft.com.br", "kauan.drey@gft.com")).build();
 	}
-	
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html")
-		.addResourceLocations("classpath:/META-INF/resources/");
-		
-		registry.addResourceHandler("/webjars/**")
-		.addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-	
-	
+
 }

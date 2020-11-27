@@ -64,7 +64,8 @@ public class LancamentoResource {
 	@ApiOperation("Buscar lançamentos pelo código")
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Lancamento> buscarPeloCodigo(@ApiParam(value = "Código de um lançamento", example = "1")@PathVariable Long codigo) {
+	public ResponseEntity<Lancamento> buscarPeloCodigo(
+			@ApiParam(value = "Código de um lançamento", example = "1") @PathVariable Long codigo) {
 		Lancamento lancamento = lancamentoRepository.findById(codigo).orElse(null);
 		return lancamento != null ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
 
@@ -73,7 +74,9 @@ public class LancamentoResource {
 	@ApiOperation("Cria um novo lançamento")
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@PostMapping
-	public ResponseEntity<Lancamento> criar(@ApiParam(name="corpo", value = "Representação de criar um Lançamento")@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
+	public ResponseEntity<Lancamento> criar(
+			@ApiParam(name = "corpo", value = "Representação de criar um Lançamento") @Valid @RequestBody Lancamento lancamento,
+			HttpServletResponse response) {
 		Lancamento lancamentoSalvo = lancamentoService.salvar(lancamento);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
@@ -94,7 +97,8 @@ public class LancamentoResource {
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@ApiParam(value = "Deleta um lançamento pelo código", example = "1")@PathVariable Long codigo) {
+	public void remover(
+			@ApiParam(value = "Deleta um lançamento pelo código", example = "1") @PathVariable Long codigo) {
 		this.lancamentoRepository.deleteById(codigo);
 
 	}
