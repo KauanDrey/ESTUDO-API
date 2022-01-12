@@ -87,9 +87,7 @@ public class PessoaResource {
 	@ApiOperation("Atualiza uma pessoa pelo código")
 	@ApiImplicitParam(name = "Authorization", value = "Bearer Token", required = true, allowEmptyValue = false, paramType = "header", example = "Bearer access_token")
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Pessoa> atualizar(
-			@ApiParam(value = "Código de uma pessoa para atualizar", example = "1") @PathVariable Long codigo,
-			@ApiParam(name = "corpo", value = "Representação de atualizar pessoa") @Valid @RequestBody Pessoa pessoa) {
+	public ResponseEntity<Pessoa> atualizar(Long codigo, @Valid @RequestBody Pessoa pessoa) {
 		Pessoa pessoaSalva = pessoaService.Atulizar(codigo, pessoa);
 		return ResponseEntity.ok(pessoaSalva);
 	}
